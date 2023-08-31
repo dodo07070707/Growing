@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:get/get.dart';
 import 'package:flutter/services.dart';
 import 'package:jinlo_project/screens/splash_screen.dart';
 import 'package:jinlo_project/screens/start_screen.dart';
@@ -49,7 +48,7 @@ class _MyAppState extends State<MyApp> {
     ));
     //SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
 
-    return GetMaterialApp(
+    return MaterialApp(
       theme: ThemeData(
         fontFamily: 'Pretendard',
         colorScheme: const ColorScheme.light(
@@ -65,7 +64,7 @@ class _MyAppState extends State<MyApp> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const SplashScreen();
                 } else {
-                  if (snapshot.hasData) {
+                  if (snapshot.data == null) {
                     return const StartScreen();
                   } else {
                     return const MainScreen();

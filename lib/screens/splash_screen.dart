@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             Column(
               children: [
-                SizedBox(height: screenHeight / 844 * 320),
+                SizedBox(height: screenHeight / 844 * 358),
                 Image.asset(
                   'assets/logos/logo_white.png',
                   width: 128,
@@ -39,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
             Column(
               children: [
                 Text(
-                  'Copyright 2023. Abibo All rights reserved',
+                  'Copyright 2023. Growing All rights reserved',
                   textAlign: TextAlign.center,
                   style: ABTextTheme.CopyrightText,
                 ),

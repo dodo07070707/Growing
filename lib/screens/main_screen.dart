@@ -10,6 +10,8 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Container(
+      child: const Center(child: Text('this is main screen')),
+    );
   }
 }
