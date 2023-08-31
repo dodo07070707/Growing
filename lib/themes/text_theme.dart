@@ -17,4 +17,27 @@ abstract class ABTextTheme {
     height: 1,
     letterSpacing: -0.4,
   );
+  static const StartMainText = TextStyle(
+    color: Colors.white,
+    fontSize: 40,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w100,
+    height: 1.2,
+    letterSpacing: -0.4,
+  );
+  static const StartDescText = TextStyle(
+    color: Colors.white,
+    fontSize: 18,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w700,
+    height: 1.2,
+    letterSpacing: -0.4,
+  );
+  static final StartRegiHintColor = TextStyle(
+    color: Colors.white.withOpacity(0.5),
+    fontSize: 18,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w700,
+    height: 1.11,
+  );
 }
