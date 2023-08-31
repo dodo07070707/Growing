@@ -55,6 +55,7 @@ class _MyAppState extends State<MyApp> {
           background: Colors.white,
           brightness: Brightness.light,
         ),
+        primaryColor: GRColors.MAIN_THEME,
       ),
       home: _showSplashScreen
           ? const Scaffold(body: SplashScreen())
