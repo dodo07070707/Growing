@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
+import 'package:jinlo_project/screens/main_screen.dart';
 import 'package:jinlo_project/themes/color_theme.dart';
 import 'package:jinlo_project/themes/text_theme.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //!여기 shared preference 추가
 class StartScreen extends StatefulWidget {
@@ -48,12 +51,24 @@ class _StartScreenState extends State<StartScreen> {
     }
   }
 
+  Future<void> _saveDataToSharedPreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    String selecteddDateString = selectedDate.toString();
+
+    await prefs.setString('name', name!);
+    await prefs.setString('date', selecteddDateString);
+
+    Get.offAll(() => const MainScreen());
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
-    return Scaffold(
-      body: Container(
+
+    return GetMaterialApp(
+      home: Container(
         width: screenWidth,
         height: screenHeight,
         color: GRColors.MAIN_THEME,
@@ -158,7 +173,9 @@ class _StartScreenState extends State<StartScreen> {
                     ),
                   ),
                 ),
-                onTap: () {},
+                onTap: () {
+                  _saveDataToSharedPreferences();
+                },
               ),
             ],
           ),

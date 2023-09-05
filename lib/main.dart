@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter/services.dart';
 import 'package:jinlo_project/screens/splash_screen.dart';
 import 'package:jinlo_project/screens/start_screen.dart';
 import 'package:jinlo_project/screens/main_screen.dart';
 import 'themes/color_theme.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,6 +24,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     _loadData();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   }
 
   Future<void> _loadData() async {
@@ -42,12 +43,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: GRColors.MAIN_THEME,
-      statusBarIconBrightness: Brightness.light,
-    ));
     //SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
-
     return MaterialApp(
       theme: ThemeData(
         fontFamily: 'Pretendard',

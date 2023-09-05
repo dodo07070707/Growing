@@ -15,6 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
     double screenHeight = MediaQuery.of(context).size.height;
     // ignore: unused_local_variable
     double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: Container(
         width: double.infinity,
