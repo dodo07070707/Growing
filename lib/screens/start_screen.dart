@@ -4,6 +4,7 @@ import 'package:jinlo_project/themes/color_theme.dart';
 import 'package:jinlo_project/themes/text_theme.dart';
 import 'package:intl/intl.dart';
 
+//!여기 shared preference 추가
 class StartScreen extends StatefulWidget {
   const StartScreen({super.key});
 
