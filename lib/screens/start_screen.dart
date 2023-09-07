@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:jinlo_project/screens/main_screen.dart';
 import 'package:jinlo_project/themes/color_theme.dart';
@@ -67,8 +66,8 @@ class _StartScreenState extends State<StartScreen> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
-    return GetMaterialApp(
-      home: Container(
+    return Scaffold(
+      body: Container(
         width: screenWidth,
         height: screenHeight,
         color: GRColors.MAIN_THEME,
