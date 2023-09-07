@@ -40,4 +40,11 @@ abstract class ABTextTheme {
     fontWeight: FontWeight.w700,
     height: 1.11,
   );
+  static const MainCardDescrb = TextStyle(
+    color: Colors.black,
+    fontSize: 20,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w400,
+    height: 1,
+  );
 }
