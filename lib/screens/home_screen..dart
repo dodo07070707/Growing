@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:jinlo_project/themes/color_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jinlo_project/themes/text_theme.dart';
 import 'package:intl/intl.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,6 +14,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String name = '';
+  String memo = '';
+  String enteredText = '';
   DateTime selectedDate = DateTime.now();
   int daysRemaining = 0;
 
@@ -25,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       name = prefs.getString('name') ?? 'No Data';
+      memo = prefs.getString('memo') ?? '입력된 메모가 없습니다.';
       String selectedDateString = prefs.getString('date')!;
       selectedDate = DateTime.parse(selectedDateString);
       _calculateDaysRemaining();
@@ -35,6 +40,36 @@ class _HomeScreenState extends State<HomeScreen> {
     DateTime currentDate = DateTime.now();
     Duration difference = selectedDate.difference(currentDate);
     daysRemaining = difference.inDays;
+  }
+
+  void _showMemoDialog() {
+    Get.defaultDialog(
+      title: '메모 수정하기',
+      titleStyle: GRTextTheme.MainCardDescrb,
+      titlePadding: const EdgeInsets.only(top: 20),
+      content: SizedBox(
+        height: 66,
+        child: TextField(
+          onChanged: (text) {
+            enteredText = text;
+          },
+          decoration: const InputDecoration(
+            labelText: ' ',
+            helperText: '생물에 대한 메모를 적어주세요',
+          ),
+        ),
+      ),
+      textConfirm: '확인',
+      confirmTextColor: Colors.white,
+      onConfirm: () {
+        memo = enteredText;
+        Get.back();
+      },
+      textCancel: '취소',
+      cancelTextColor: GRColors.MAIN_THEME,
+      onCancel: Get.back,
+      buttonColor: GRColors.MAIN_THEME,
+    );
   }
 
   @override
@@ -140,22 +175,37 @@ class _HomeScreenState extends State<HomeScreen> {
                       Column(
                         children: [
                           Container(
-                            decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(15),
-                                    topRight: Radius.circular(15))),
-                            child: Image.asset('assets/exampleimg.jpg',
-                                width: screenHeight / 844 * 318,
-                                height: screenHeight / 844 * 318),
-                          ),
-                          Container(
-                            decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(15),
-                                    topRight: Radius.circular(15))),
+                              decoration: const BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(15),
+                                      topRight: Radius.circular(15))),
+                              child: Stack(
+                                children: [
+                                  Image.asset(
+                                    'assets/exampleimg.jpg',
+                                    width: screenHeight / 844 * 330,
+                                    height: screenHeight / 844 * 330,
+                                  ),
+                                  Container(
+                                    width: screenHeight / 844 * 330,
+                                    height: screenHeight / 844 * 330,
+                                    decoration: const BoxDecoration(
+                                      color: Color.fromRGBO(0, 0, 0, 0.5),
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(15),
+                                        topRight: Radius.circular(15),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )),
+                          GestureDetector(
+                            onTap: () {
+                              _showMemoDialog();
+                            },
                             child: Container(
-                              width: screenHeight / 844 * 318,
-                              height: screenHeight / 844 * 112,
+                              width: screenHeight / 844 * 330,
+                              height: screenHeight / 844 * 120,
                               decoration: const BoxDecoration(
                                 color: Color(0xFFD9D9D9),
                                 borderRadius: BorderRadius.only(
@@ -163,15 +213,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                   bottomRight: Radius.circular(15),
                                 ),
                               ),
-                              child: const Padding(
-                                padding: EdgeInsets.all(10.0),
-                                child: Text(
-                                  '여기에 표시할 text', //!! 표시할 텍스트를 여기에 추가
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black,
-                                  ),
-                                ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(14.0),
+                                child:
+                                    Text(memo, style: GRTextTheme.MainCardMemo),
                               ),
                             ),
                           ),

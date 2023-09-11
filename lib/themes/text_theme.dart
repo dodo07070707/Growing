@@ -47,4 +47,11 @@ abstract class GRTextTheme {
     fontWeight: FontWeight.w400,
     height: 1,
   );
+  static const MainCardMemo = TextStyle(
+    color: Colors.black,
+    fontSize: 14,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w400,
+    height: 1,
+  );
 }
