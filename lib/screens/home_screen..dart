@@ -53,9 +53,15 @@ class _HomeScreenState extends State<HomeScreen> {
           onChanged: (text) {
             enteredText = text;
           },
+          cursorColor: GRColors.MAIN_THEME,
           decoration: const InputDecoration(
             labelText: ' ',
             helperText: '생물에 대한 메모를 적어주세요',
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                color: GRColors.MAIN_THEME,
+              ),
+            ),
           ),
         ),
       ),
