@@ -3,6 +3,7 @@ import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_not
 import 'package:jinlo_project/screens/camera_screen.dart';
 import 'package:jinlo_project/screens/home_screen..dart';
 import 'package:jinlo_project/screens/setting_screen.dart';
+import 'package:jinlo_project/themes/color_theme.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -28,6 +29,9 @@ class _MainScreenState extends State<MainScreen> {
   ];
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    // ignore: unused_local_variable
+    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: PageView(
         controller: _pageController,
@@ -38,54 +42,50 @@ class _MainScreenState extends State<MainScreen> {
       extendBody: true,
       bottomNavigationBar: (bottomBarPages.length <= maxCount)
           ? AnimatedNotchBottomBar(
-              /// Provide NotchBottomBarController
               notchBottomBarController: _controller,
               color: Colors.white,
-              showLabel: false,
-              notchColor: Colors.black87,
-
-              /// restart app if you change removeMargins
+              showLabel: true,
+              notchColor: GRColors.MAIN_THEME,
               removeMargins: false,
               bottomBarWidth: 500,
-              durationInMilliSeconds: 300,
-              bottomBarItems: const [
-                BottomBarItem(
+              durationInMilliSeconds: 50,
+              bottomBarItems: [
+                const BottomBarItem(
                   inActiveItem: Icon(
                     Icons.home_filled,
-                    color: Colors.blueGrey,
+                    color: Color(0xFFB3B3b3),
                   ),
                   activeItem: Icon(
                     Icons.home_filled,
-                    color: Colors.blueAccent,
+                    color: Colors.white,
                   ),
-                  itemLabel: 'Page 1',
+                  itemLabel: '홈',
                 ),
                 BottomBarItem(
-                  inActiveItem: Icon(
-                    Icons.star,
-                    color: Colors.blueGrey,
+                  inActiveItem: const Icon(
+                    Icons.camera_alt_outlined,
+                    color: Color(0xFFB3B3b3),
                   ),
-                  activeItem: Icon(
-                    Icons.star,
-                    color: Colors.blueAccent,
+                  activeItem: Image.asset(
+                    'assets/logos/logo_white.png',
+                    width: 100,
+                    height: 100,
                   ),
-                  itemLabel: 'Page 2',
+                  itemLabel: '카메라',
                 ),
-                BottomBarItem(
+                const BottomBarItem(
                   inActiveItem: Icon(
-                    Icons.settings,
-                    color: Colors.blueGrey,
+                    Icons.image_outlined,
+                    color: Color(0xFFB3B3B3),
                   ),
                   activeItem: Icon(
-                    Icons.settings,
-                    color: Colors.pink,
+                    Icons.image_outlined,
+                    color: Colors.white,
                   ),
-                  itemLabel: 'Page 3',
+                  itemLabel: '이미지',
                 ),
               ],
               onTap: (index) {
-                /// perform action on tab change and to update pages you can update pages without pages
-                print('current selected index $index');
                 _pageController.jumpToPage(index);
               },
             )
