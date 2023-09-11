@@ -89,11 +89,11 @@ class _StartScreenState extends State<StartScreen> {
                     height: 100,
                   ),
                   SizedBox(height: screenHeight / 844 * 10),
-                  const Text('Growing', style: ABTextTheme.StartMainText),
+                  const Text('Growing', style: GRTextTheme.StartMainText),
                   SizedBox(height: screenHeight / 844 * 40),
                   const Text(
                     '환영합니다\n키울 생물의 이름과\n처음 만난 날짜를 입력해주세요',
-                    style: ABTextTheme.StartDescText,
+                    style: GRTextTheme.StartDescText,
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: screenHeight / 844 * 80),
@@ -107,7 +107,7 @@ class _StartScreenState extends State<StartScreen> {
                       },
                       decoration: InputDecoration(
                         hintText: "이름 입력",
-                        hintStyle: ABTextTheme.StartRegiHintColor,
+                        hintStyle: GRTextTheme.StartRegiHintColor,
                         enabledBorder: const UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: GRColors.Regi_Hint_Color,

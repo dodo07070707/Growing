@@ -42,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 Text(
                   'Copyright 2023. Growing All rights reserved',
                   textAlign: TextAlign.center,
-                  style: ABTextTheme.CopyrightText,
+                  style: GRTextTheme.CopyrightText,
                 ),
                 SizedBox(height: screenHeight / 844 * 65),
               ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class ABTextTheme {
+abstract class GRTextTheme {
   static const MenuBar = TextStyle(
     fontFamily: 'Pretendard',
     fontWeight: FontWeight.bold,

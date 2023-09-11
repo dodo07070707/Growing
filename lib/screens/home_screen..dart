@@ -120,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               Text(
                                 name,
-                                style: ABTextTheme.MainCardDescrb,
+                                style: GRTextTheme.MainCardDescrb,
                               )
                             ],
                           ),
@@ -131,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   size: 24, color: Colors.black),
                               const SizedBox(width: 2),
                               Text('D-$daysRemaining',
-                                  style: ABTextTheme.MainCardDescrb),
+                                  style: GRTextTheme.MainCardDescrb),
                             ],
                           )
                         ],
@@ -145,7 +145,35 @@ class _HomeScreenState extends State<HomeScreen> {
                                     topLeft: Radius.circular(15),
                                     topRight: Radius.circular(15))),
                             child: Image.asset('assets/exampleimg.jpg',
-                                width: 318, height: 318),
+                                width: screenHeight / 844 * 318,
+                                height: screenHeight / 844 * 318),
+                          ),
+                          Container(
+                            decoration: const BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(15),
+                                    topRight: Radius.circular(15))),
+                            child: Container(
+                              width: screenHeight / 844 * 318,
+                              height: screenHeight / 844 * 112,
+                              decoration: const BoxDecoration(
+                                color: Color(0xFFD9D9D9),
+                                borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(15),
+                                  bottomRight: Radius.circular(15),
+                                ),
+                              ),
+                              child: const Padding(
+                                padding: EdgeInsets.all(10.0),
+                                child: Text(
+                                  '여기에 표시할 text', //!! 표시할 텍스트를 여기에 추가
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
                         ],
                       ),
