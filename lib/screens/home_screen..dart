@@ -16,6 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String name = '';
   String memo = '';
   String enteredText = '';
+  String daycountingText = '';
   DateTime selectedDate = DateTime.now();
   int daysRemaining = 0;
 
@@ -40,6 +41,15 @@ class _HomeScreenState extends State<HomeScreen> {
     DateTime currentDate = DateTime.now();
     Duration difference = selectedDate.difference(currentDate);
     daysRemaining = difference.inDays;
+    setState(() {
+      if (daysRemaining == 0) {
+        daycountingText = "D-Day";
+      } else if (daysRemaining > 0) {
+        daycountingText = "D+$daysRemaining";
+      } else {
+        daycountingText = "D$daysRemaining";
+      }
+    });
   }
 
   void _showMemoDialog() {
@@ -171,7 +181,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               const Icon(Icons.calendar_month,
                                   size: 24, color: Colors.black),
                               const SizedBox(width: 2),
-                              Text('D-$daysRemaining',
+                              Text(daycountingText,
                                   style: GRTextTheme.MainCardDescrb),
                             ],
                           )

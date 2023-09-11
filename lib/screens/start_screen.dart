@@ -67,116 +67,118 @@ class _StartScreenState extends State<StartScreen> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      body: Container(
-        width: screenWidth,
-        height: screenHeight,
-        color: GRColors.MAIN_THEME,
-        child: Padding(
-          padding: EdgeInsets.only(
-            top: screenHeight / 844 * 128,
-            bottom: screenHeight / 844 * 54,
-            left: screenWidth / 390 * 40,
-            right: screenWidth / 390 * 40,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
-                  Image.asset(
-                    'assets/logos/logo_white.png',
-                    width: 100,
-                    height: 100,
-                  ),
-                  SizedBox(height: screenHeight / 844 * 10),
-                  const Text('Growing', style: GRTextTheme.StartMainText),
-                  SizedBox(height: screenHeight / 844 * 40),
-                  const Text(
-                    '환영합니다\n키울 생물의 이름과\n처음 만난 날짜를 입력해주세요',
-                    style: GRTextTheme.StartDescText,
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: screenHeight / 844 * 80),
-                  SizedBox(
-                    height: 21,
-                    child: TextField(
-                      onChanged: (value) {
-                        setState(() {
-                          name = value.toLowerCase().removeAllWhitespace;
-                        });
-                      },
-                      decoration: InputDecoration(
-                        hintText: "이름 입력",
-                        hintStyle: GRTextTheme.StartRegiHintColor,
-                        enabledBorder: const UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: GRColors.Regi_Hint_Color,
-                            width: 1.5,
+      body: SingleChildScrollView(
+        child: Container(
+          width: screenWidth,
+          height: screenHeight,
+          color: GRColors.MAIN_THEME,
+          child: Padding(
+            padding: EdgeInsets.only(
+              top: screenHeight / 844 * 128,
+              bottom: screenHeight / 844 * 54,
+              left: screenWidth / 390 * 40,
+              right: screenWidth / 390 * 40,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    Image.asset(
+                      'assets/logos/logo_white.png',
+                      width: 100,
+                      height: 100,
+                    ),
+                    SizedBox(height: screenHeight / 844 * 10),
+                    const Text('Growing', style: GRTextTheme.StartMainText),
+                    SizedBox(height: screenHeight / 844 * 40),
+                    const Text(
+                      '환영합니다\n키울 생물의 이름과\n처음 만난 날짜를 입력해주세요',
+                      style: GRTextTheme.StartDescText,
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: screenHeight / 844 * 80),
+                    SizedBox(
+                      height: 21,
+                      child: TextField(
+                        onChanged: (value) {
+                          setState(() {
+                            name = value.toLowerCase().removeAllWhitespace;
+                          });
+                        },
+                        decoration: InputDecoration(
+                          hintText: "이름 입력",
+                          hintStyle: GRTextTheme.StartRegiHintColor,
+                          enabledBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: GRColors.Regi_Hint_Color,
+                              width: 1.5,
+                            ),
+                          ),
+                          focusedBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: GRColors.Regi_Hint_Color,
+                              width: 1.5,
+                            ),
                           ),
                         ),
-                        focusedBorder: const UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: GRColors.Regi_Hint_Color,
-                            width: 1.5,
+                        style: const TextStyle(
+                          // 입력중 text color
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: screenHeight / 844 * 20),
+                    SizedBox(
+                      height: 44,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                        onPressed: _selectDate,
+                        child: Center(
+                          child: Text(
+                            (selectedDate != null)
+                                ? DateFormat('yyyy년 MM월 dd일')
+                                    .format(selectedDate!)
+                                : "날짜 선택",
+                            style: const TextStyle(color: GRColors.MAIN_THEME),
                           ),
                         ),
                       ),
-                      style: const TextStyle(
-                        // 입력중 text color
-                        color: Colors.white,
-                      ),
                     ),
-                  ),
-                  SizedBox(height: screenHeight / 844 * 20),
-                  SizedBox(
-                    height: 44,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      ),
-                      onPressed: _selectDate,
-                      child: Center(
-                        child: Text(
-                          (selectedDate != null)
-                              ? DateFormat('yyyy년 MM월 dd일')
-                                  .format(selectedDate!)
-                              : "날짜 선택",
-                          style: const TextStyle(color: GRColors.MAIN_THEME),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              GestureDetector(
-                child: Container(
-                  height: screenHeight / 844 * 66,
-                  width: screenWidth,
-                  padding: const EdgeInsets.all(0),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      '다음으로',
-                      style: TextStyle(
-                        color: Color(0xFF00B375),
-                        fontSize: 18,
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
+                  ],
                 ),
-                onTap: () {
-                  _saveDataToSharedPreferences();
-                },
-              ),
-            ],
+                GestureDetector(
+                  child: Container(
+                    height: screenHeight / 844 * 66,
+                    width: screenWidth,
+                    padding: const EdgeInsets.all(0),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        '다음으로',
+                        style: TextStyle(
+                          color: Color(0xFF00B375),
+                          fontSize: 18,
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                  ),
+                  onTap: () {
+                    _saveDataToSharedPreferences();
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
