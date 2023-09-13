@@ -21,10 +21,11 @@ class _CameraScreenState extends State<CameraScreen> {
       if (cameras.isNotEmpty && _cameraController == null) {
         _cameraController = CameraController(
           cameras.first,
-          ResolutionPreset.medium,
+          ResolutionPreset.ultraHigh,
         );
 
         _cameraController!.initialize().then((_) {
+          _cameraController!.setFlashMode(FlashMode.off);
           setState(() {
             _isCameraReady = true;
           });
@@ -33,39 +34,77 @@ class _CameraScreenState extends State<CameraScreen> {
     });
   }
 
-  void _onTakePicture(BuildContext context) {
-    _cameraController!.takePicture().then((image) {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => PhotoPreview(
-            imagePath: image.path,
-          ),
-        ),
-      );
-    });
+  void _onTakePicture(BuildContext context) async {
+    if (_cameraController != null) {
+      try {
+        final XFile image = await _cameraController!.takePicture();
+        if (image != null) {
+          // 사진 촬영이 완료되면 미리보기 화면으로 이동
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => PhotoPreview(
+                imagePath: image.path,
+              ),
+            ),
+          );
+        } else {
+          print('사진 촬영 실패');
+        }
+      } catch (e) {
+        print('사진 촬영 중 오류 발생: $e');
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    // ignore: unused_local_variable
+    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: SafeArea(
-        child: Column(
+      body: SizedBox(
+        width: screenWidth,
+        height: screenHeight,
+        child: Stack(
           children: [
-            Expanded(
-              flex: 1,
+            SizedBox(
+              width: screenWidth,
+              height: screenHeight,
               child: _cameraController != null && _isCameraReady
                   ? CameraPreview(_cameraController!)
                   : Container(
                       color: Colors.grey,
                     ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: ElevatedButton(
-                onPressed: _cameraController != null
-                    ? () => _onTakePicture(context)
-                    : null,
-                child: const Text('Take a photo'),
+            Positioned(
+              bottom: screenHeight / 844 * 130,
+              right: screenWidth / 390 * 160,
+              child: Container(
+                height: 60.1,
+                width: 60.1,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.5),
+                      blurRadius: 4,
+                      offset: const Offset(0, 0),
+                      spreadRadius: 0,
+                    ),
+                  ],
+                ),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      shape: const CircleBorder(),
+                      backgroundColor: Colors.white,
+                      fixedSize: const Size(60, 60)),
+                  onPressed: _cameraController != null
+                      ? () => _onTakePicture(context)
+                      : null,
+                  child: const Text(''),
+                ),
               ),
             ),
           ],
