@@ -3,7 +3,12 @@ import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_not
 import 'package:jinlo_project/screens/camera_screen.dart';
 import 'package:jinlo_project/screens/home_screen..dart';
 import 'package:jinlo_project/screens/setting_screen.dart';
+import 'package:get/get.dart';
 import 'package:jinlo_project/themes/color_theme.dart';
+import 'package:event_bus/event_bus.dart';
+
+//! preview에서 back칠때 myController.isButtonPressed.value 값 변경
+//! notchbar 말고 icon에서만 눌림
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -15,6 +20,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   final _pageController = PageController(initialPage: 0);
   final _controller = NotchBottomBarController(index: 0);
+  final MyController myController = Get.put(MyController());
   int maxCount = 5;
   @override
   void dispose() {
@@ -66,10 +72,20 @@ class _MainScreenState extends State<MainScreen> {
                     Icons.camera_alt_outlined,
                     color: Color(0xFFB3B3b3),
                   ),
-                  activeItem: Image.asset(
-                    'assets/logos/logo_white.png',
-                    width: 100,
-                    height: 100,
+                  activeItem: GestureDetector(
+                    onTap: () {
+                      myController.toggleButtonState();
+                      print('pressed');
+                      print(myController.isButtonPressed.value);
+                      if (myController.isButtonPressed.value) {
+                        eventBus.fire(MyEvent());
+                      }
+                    },
+                    child: Image.asset(
+                      'assets/logos/logo_white.png',
+                      width: 100,
+                      height: 100,
+                    ),
                   ),
                   itemLabel: '카메라',
                 ),
@@ -93,3 +109,13 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 }
+
+class MyController extends GetxController {
+  var isButtonPressed = false.obs;
+
+  void toggleButtonState() {
+    isButtonPressed.value = !isButtonPressed.value;
+  }
+}
+
+final eventBus = EventBus();

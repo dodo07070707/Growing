@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'camera_result_screen.dart';
+import 'main_screen.dart';
 
 class CameraScreen extends StatefulWidget {
   const CameraScreen({super.key});
@@ -16,6 +17,10 @@ class _CameraScreenState extends State<CameraScreen> {
   @override
   void initState() {
     super.initState();
+
+    eventBus.on<MyEvent>().listen((event) {
+      _onTakePicture(context);
+    });
 
     availableCameras().then((cameras) {
       if (cameras.isNotEmpty && _cameraController == null) {
@@ -76,8 +81,8 @@ class _CameraScreenState extends State<CameraScreen> {
                       color: Colors.grey,
                     ),
             ),
-            Positioned(
-              bottom: screenHeight / 844 * 130,
+            /*Positioned(
+              bottom: screenHeight / 844 * 60,
               right: screenWidth / 390 * 160,
               child: Container(
                 height: 60.1,
@@ -107,9 +112,26 @@ class _CameraScreenState extends State<CameraScreen> {
                 ),
               ),
             ),
+            
+            Positioned(
+              top: 0,
+              left: 0,
+              child: GestureDetector(
+                  child: const Icon(
+                    Icons.arrow_back_ios_outlined,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                  onTap: () {
+                    () => Get.back();
+                  }),
+            ), // 사용하지 않음
+            */
           ],
         ),
       ),
     );
   }
 }
+
+class MyEvent {}
