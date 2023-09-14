@@ -45,6 +45,9 @@ dependencies:
   event_bus: ^2.0.0
   camerawesome: ^1.4.0
   better_open_file:
+  image:
+  image_picker:
+  image_cropper:
 
 dev_dependencies:
   flutter_test:

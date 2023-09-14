@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 
 class PhotoPreview extends StatelessWidget {
@@ -9,13 +8,19 @@ class PhotoPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
+    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(title: const Text('Preview')),
       body: Container(
-        color: Colors.grey,
+        color: Colors.white,
         child: Center(
-          child: Image.file(
-            File(imagePath),
+          child: SizedBox(
+            width: screenWidth / 390 * 318,
+            height: screenWidth / 390 * 318,
+            child: Image.file(
+              File(imagePath),
+              fit: BoxFit.cover,
+            ),
           ),
         ),
       ),
