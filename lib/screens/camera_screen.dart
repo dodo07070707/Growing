@@ -86,52 +86,6 @@ class _CameraScreenState extends State<CameraScreen> {
                       color: Colors.grey,
                     ),
             ),
-            /*Positioned(
-              bottom: screenHeight / 844 * 60,
-              right: screenWidth / 390 * 160,
-              child: Container(
-                height: 60.1,
-                width: 60.1,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.5),
-                      blurRadius: 4,
-                      offset: const Offset(0, 0),
-                      spreadRadius: 0,
-                    ),
-                  ],
-                ),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      shape: const CircleBorder(),
-                      backgroundColor: Colors.white,
-                      fixedSize: const Size(60, 60)),
-                  onPressed: _cameraController != null
-                      ? () => _onTakePicture(context)
-                      : null,
-                  child: const Text(''),
-                ),
-              ),
-            ),
-            
-            Positioned(
-              top: 0,
-              left: 0,
-              child: GestureDetector(
-                  child: const Icon(
-                    Icons.arrow_back_ios_outlined,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                  onTap: () {
-                    () => Get.back();
-                  }),
-            ), // 사용하지 않음
-            */
           ],
         ),
       ),
