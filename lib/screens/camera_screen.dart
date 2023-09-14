@@ -44,7 +44,6 @@ class _CameraScreenState extends State<CameraScreen> {
       try {
         final XFile image = await _cameraController!.takePicture();
         if (image != null) {
-          // 사진 촬영이 완료되면 미리보기 화면으로 이동
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => PhotoPreview(
@@ -59,6 +58,12 @@ class _CameraScreenState extends State<CameraScreen> {
         print('사진 촬영 중 오류 발생: $e');
       }
     }
+  }
+
+  @override
+  void dispose() {
+    _cameraController?.dispose();
+    super.dispose();
   }
 
   @override
