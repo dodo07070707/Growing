@@ -6,7 +6,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "27c222f7b7a353143ed480d101435d8e5a9353ca"
+      resolved-ref: "9118cd8f92c85d8aeb5601a8af3f2fad15c57228"
       url: "https://github.com/dodo07070707/animated_notch_bottom_bar.git"
     source: git
     version: "1.0.0"
