@@ -6,6 +6,7 @@ import 'package:jinlo_project/screens/setting_screen.dart';
 import 'package:get/get.dart';
 import 'package:jinlo_project/themes/color_theme.dart';
 import 'package:event_bus/event_bus.dart';
+import 'package:jinlo_project/themes/text_theme.dart';
 
 //! preview에서 back칠때 myController.isButtonPressed.value 값 변경
 //! notchbar 말고 icon에서만 눌림
@@ -55,6 +56,7 @@ class _MainScreenState extends State<MainScreen> {
               removeMargins: false,
               bottomBarWidth: 500,
               durationInMilliSeconds: 50,
+              itemLabelStyle: GRTextTheme.BottomBarLabel,
               bottomBarItems: [
                 const BottomBarItem(
                   inActiveItem: Icon(

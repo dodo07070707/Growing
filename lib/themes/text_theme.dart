@@ -54,4 +54,18 @@ abstract class GRTextTheme {
     fontWeight: FontWeight.w400,
     height: 1,
   );
+  static const BottomBarLabel = TextStyle(
+    color: Color(0xFFB3B3b3),
+    fontSize: 11.5,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w400,
+    height: 1.1,
+  );
+  static const TitleMiddle = TextStyle(
+    color: Colors.black,
+    fontSize: 24,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w400,
+    height: 1,
+  );
 }
