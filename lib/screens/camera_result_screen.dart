@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:jinlo_project/screens/main_screen.dart';
 import 'package:jinlo_project/themes/color_theme.dart';
 import 'package:jinlo_project/themes/text_theme.dart';
 import 'package:path_provider/path_provider.dart';
@@ -16,7 +17,7 @@ class PhotoPreview extends StatelessWidget {
     final nowFormattedDate = DateFormat('yyyy-MM-dd').format(nowDate);
     // 이미지를 앱의 로컬 디렉토리에 저장하기 위한 경로 가져오기
     final appDir = await getApplicationDocumentsDirectory();
-    final fileName = '$nowFormattedDate.jpg'; //!여기 수정
+    final fileName = '$nowFormattedDate.jpg';
     final localImage = File('${appDir.path}/$fileName');
 
     // 이미지 복사
@@ -113,8 +114,8 @@ class PhotoPreview extends StatelessWidget {
                         ),
                       ),
                     ),
-                    onTap: () async {
-                      //Get.to()
+                    onTap: () {
+                      Get.back();
                     },
                   ),
                   SizedBox(height: screenHeight / 844 * 18),
@@ -135,7 +136,7 @@ class PhotoPreview extends StatelessWidget {
                           ]),
                       child: const Center(
                         child: Text(
-                          '다음으로 !',
+                          '저장하기',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.white,
@@ -149,8 +150,7 @@ class PhotoPreview extends StatelessWidget {
                     ),
                     onTap: () async {
                       await saveImage();
-                      Get.snackbar('성공', 'ㅁㄴㅇㄹ',
-                          duration: const Duration(seconds: 2));
+                      Get.offAll(() => const MainScreen());
                     },
                   ),
                   SizedBox(height: screenHeight / 844 * 110),
