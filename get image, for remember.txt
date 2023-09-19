@@ -1,0 +1,7 @@
+if (imagePath.isNotEmpty)
+                    Image.file(
+                      File(imagePath),
+                      width: 200, // 이미지의 가로 크기 설정
+                      height: 200, // 이미지의 세로 크기 설정 (원하는 크기로 조절하세요)
+                      fit: BoxFit.cover, // 이미지를 화면에 맞게 조절
+                    ),

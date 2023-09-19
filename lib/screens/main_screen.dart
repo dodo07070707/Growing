@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import 'package:jinlo_project/screens/camera_screen.dart';
 import 'package:jinlo_project/screens/home_screen..dart';
-import 'package:jinlo_project/screens/setting_screen.dart';
+import 'package:jinlo_project/screens/image_screen.dart';
 import 'package:get/get.dart';
 import 'package:jinlo_project/themes/color_theme.dart';
 import 'package:event_bus/event_bus.dart';
@@ -32,7 +32,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> bottomBarPages = [
     const HomeScreen(),
     const CameraScreen(),
-    const SettingScreen(),
+    const ImageScreen(),
   ];
   @override
   Widget build(BuildContext context) {
