@@ -8,6 +8,7 @@ import 'themes/color_theme.dart';
 import 'package:flutter/services.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
