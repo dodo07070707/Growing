@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
+import 'package:get/get.dart';
 
 class ImageScreen extends StatefulWidget {
   const ImageScreen({super.key});
@@ -132,6 +133,7 @@ class _ImageScreenState extends State<ImageScreen> {
                 ),
               ],
             ),
+            SizedBox(height: screenHeight / 844 * 30),
             Padding(
               padding: EdgeInsets.only(
                 top: 0,
@@ -145,6 +147,7 @@ class _ImageScreenState extends State<ImageScreen> {
                   child: Column(
                     children: [
                       ListView.builder(
+                        reverse: true, // ! 이걸로 역순 조정, 역순 버튼 만들기
                         shrinkWrap: true,
                         itemCount: dateKeys.length,
                         itemBuilder: (context, index) {
@@ -153,45 +156,65 @@ class _ImageScreenState extends State<ImageScreen> {
 
                           return InkWell(
                             onTap: () {
-                              // 해당 날짜의 이미지 목록 화면으로 이동
-                              /*Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ImageListByDate(imagePaths),
-                                  ),
-                                );*/
-                              print('$imagePaths , $imagePath');
+                              Get.to(() => ImageScreenByDate(imagePaths));
                             },
-                            child: SizedBox(
-                                height: screenHeight / 844 * 86,
-                                width: screenWidth / 390 * 320,
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: FileImage(
-                                              File(imagePaths!.join(''))),
-                                          fit: BoxFit.cover,
+                            child: Column(
+                              children: [
+                                Container(
+                                  height: screenHeight / 844 * 86,
+                                  width: screenWidth / 390 * 320,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(25),
+                                          image: DecorationImage(
+                                            image: FileImage(
+                                                File(imagePaths!.join(''))),
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    // 투명도가 0.5인 검정색 Container
-                                    Container(
-                                      color: Colors.black.withOpacity(0.5),
-                                    ),
-                                    // 텍스트를 배치
-                                    Center(
-                                      child: Text(
-                                        date,
-                                        style: const TextStyle(
-                                          fontSize: 24,
-                                          color: Colors.white, // 텍스트 색상 설정
+                                      // 투명도가 0.5인 검정색 Container
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.black.withOpacity(0.5),
+                                          borderRadius:
+                                              BorderRadius.circular(25),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                )),
+                                      SizedBox(
+                                        height: screenHeight / 844 * 86,
+                                        width: screenWidth / 390 * 320,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              date,
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 15,
+                                                fontFamily: 'Pretendard',
+                                                fontWeight: FontWeight.w500,
+                                                height: 1,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(height: screenHeight / 844 * 20),
+                              ],
+                            ),
                           );
                         },
                       ),
@@ -204,5 +227,19 @@ class _ImageScreenState extends State<ImageScreen> {
         ),
       ),
     );
+  }
+}
+
+class ImageScreenByDate extends StatefulWidget {
+  const ImageScreenByDate({super.key});
+
+  @override
+  State<ImageScreenByDate> createState() => _ImageScreenByDateState();
+}
+
+class _ImageScreenByDateState extends State<ImageScreenByDate> {
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
