@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:get/get.dart';
+import 'image_screen_bydate.dart';
 
 class ImageScreen extends StatefulWidget {
   const ImageScreen({super.key});
@@ -156,7 +157,10 @@ class _ImageScreenState extends State<ImageScreen> {
 
                           return InkWell(
                             onTap: () {
-                              Get.to(() => ImageScreenByDate(imagePaths));
+                              Get.to(() => ImageScreenByDate(
+                                  imagePaths: imagePaths,
+                                  name: name,
+                                  date: date));
                             },
                             child: Column(
                               children: [
@@ -229,9 +233,18 @@ class _ImageScreenState extends State<ImageScreen> {
     );
   }
 }
-
+/*
 class ImageScreenByDate extends StatefulWidget {
-  const ImageScreenByDate({super.key});
+  const ImageScreenByDate({
+    Key? key,
+    required this.imagePaths,
+    required this.name,
+    required this.date,
+  }) : super(key: key);
+
+  final List<String> imagePaths;
+  final String name;
+  final String date;
 
   @override
   State<ImageScreenByDate> createState() => _ImageScreenByDateState();
@@ -240,6 +253,79 @@ class ImageScreenByDate extends StatefulWidget {
 class _ImageScreenByDateState extends State<ImageScreenByDate> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    final imagePaths = widget.imagePaths;
+    double screenHeight = MediaQuery.of(context).size.height;
+    // ignore: unused_local_variable
+    double screenWidth = MediaQuery.of(context).size.width;
+    String name = widget.name;
+    String date = widget.date;
+    return Scaffold(
+      body: Container(
+        color: Colors.white,
+        child: Column(
+          children: [
+            SizedBox(height: screenHeight / 844 * 64),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    SizedBox(width: screenWidth / 390 * 22),
+                    GestureDetector(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: const Icon(Icons.arrow_back_ios_new,
+                          size: 24, color: Colors.black),
+                    ),
+                    SizedBox(width: screenWidth / 390 * 6),
+                    Text(
+                      name,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 24,
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w400,
+                        height: 1.4,
+                      ),
+                    )
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Icon(Icons.calendar_month,
+                        size: 24, color: Colors.black),
+                    SizedBox(width: screenWidth / 390 * 4),
+                    Text(
+                      date,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 24,
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w400,
+                        height: 1.4,
+                      ),
+                    ),
+                    SizedBox(width: screenWidth / 390 * 22),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(height: screenHeight / 844 * 150),
+            Container(
+              width: screenWidth / 390 * 318,
+              height: screenWidth / 390 * 318,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: FileImage(File(imagePaths.join(''))),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
+*/
