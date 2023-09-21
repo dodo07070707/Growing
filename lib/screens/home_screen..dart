@@ -4,6 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jinlo_project/themes/text_theme.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,11 +21,14 @@ class _HomeScreenState extends State<HomeScreen> {
   String daycountingText = '';
   DateTime selectedDate = DateTime.now();
   int daysRemaining = 0;
+  String staredDate = '';
+  String filePath = '';
 
   @override
   void initState() {
     super.initState();
     _loadDataFromSharedPreferences();
+    getFilePath();
   }
 
   Future<void> _loadDataFromSharedPreferences() async {
@@ -31,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       name = prefs.getString('name') ?? 'No Data';
       memo = prefs.getString('memo') ?? '입력된 메모가 없습니다.';
+      staredDate = prefs.getString('staredDate') ?? 'No Stared Date';
       String selectedDateString = prefs.getString('date')!;
       selectedDate = DateTime.parse(selectedDateString);
       _calculateDaysRemaining();
@@ -86,6 +92,13 @@ class _HomeScreenState extends State<HomeScreen> {
       onCancel: Get.back,
       buttonColor: GRColors.MAIN_THEME,
     );
+  }
+
+  Future<String> getFilePath() async {
+    final Directory appDocumentDirectory =
+        await getApplicationDocumentsDirectory();
+    filePath = appDocumentDirectory.path;
+    return filePath;
   }
 
   @override
@@ -197,14 +210,34 @@ class _HomeScreenState extends State<HomeScreen> {
                                       topRight: Radius.circular(15))),
                               child: Stack(
                                 children: [
-                                  Image.asset(
-                                    'assets/exampleimg.jpg',
-                                    width: screenHeight / 844 * 330,
-                                    height: screenHeight / 844 * 330,
-                                  ),
+                                  FutureBuilder(
+                                      future: getFilePath(),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.hasData) {
+                                          return Container(
+                                            width: screenWidth / 390 * 330,
+                                            height: screenWidth / 390 * 330,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(15),
+                                                      topRight:
+                                                          Radius.circular(15)),
+                                              image: DecorationImage(
+                                                image: FileImage(File(
+                                                    '$filePath/$staredDate.jpg')),
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          );
+                                        } else {
+                                          return const Text('안돼');
+                                        }
+                                      }),
                                   Container(
-                                    width: screenHeight / 844 * 330,
-                                    height: screenHeight / 844 * 330,
+                                    width: screenWidth / 390 * 330,
+                                    height: screenWidth / 390 * 330,
                                     decoration: const BoxDecoration(
                                       color: Color.fromRGBO(0, 0, 0, 0.5),
                                       borderRadius: BorderRadius.only(

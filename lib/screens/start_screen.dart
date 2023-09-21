@@ -56,6 +56,7 @@ class _StartScreenState extends State<StartScreen> {
 
     await prefs.setString('name', name!);
     await prefs.setString('date', selecteddDateString);
+    await prefs.setString('staredDate', '');
 
     Get.offAll(() => const MainScreen());
   }

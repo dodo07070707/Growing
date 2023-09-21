@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:get/get.dart';
-//import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ImageScreenByDate extends StatefulWidget {
   const ImageScreenByDate({
@@ -20,14 +20,34 @@ class ImageScreenByDate extends StatefulWidget {
 }
 
 class _ImageScreenByDateState extends State<ImageScreenByDate> {
-  /*Future<void> _saveStarToSharedPreferences() async {
+  String staredDate = '';
+  late bool isStarFilled;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      _loadDataFromSharedPreferences();
+    });
+    if (widget.date == staredDate) {
+      isStarFilled = true;
+    } else {
+      isStarFilled = false;
+    }
+  }
+
+  Future<void> _loadDataFromSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      staredDate = prefs.getString('staredDate') ?? 'No Data';
+    });
+  }
 
-    String nowStared = nowStared.toString();
-
-    await prefs.setString('name', name!);
-  //!get snackbar
-  }*/
+  Future<void> _saveStarToSharedPreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('staredDate', staredDate);
+    Get.snackbar('알림', '대표사진이 설정되었습니다.', duration: const Duration(seconds: 1));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +57,7 @@ class _ImageScreenByDateState extends State<ImageScreenByDate> {
     double screenWidth = MediaQuery.of(context).size.width;
     String name = widget.name;
     String date = widget.date;
+
     return Scaffold(
       body: Container(
         color: Colors.white,
@@ -84,6 +105,17 @@ class _ImageScreenByDateState extends State<ImageScreenByDate> {
                         height: 1.4,
                       ),
                     ),
+                    SizedBox(width: screenWidth / 390 * 4),
+                    StarIcon(
+                      isFilled: isStarFilled,
+                      onPressed: () {
+                        setState(() {
+                          isStarFilled = !isStarFilled;
+                          staredDate = isStarFilled ? date : '';
+                          _saveStarToSharedPreferences(); // 변경된 stareddate 저장
+                        });
+                      },
+                    ),
                     SizedBox(width: screenWidth / 390 * 22),
                   ],
                 ),
@@ -100,8 +132,33 @@ class _ImageScreenByDateState extends State<ImageScreenByDate> {
                 ),
               ),
             ),
+            Text('$staredDate,$date,$imagePaths')
           ],
         ),
+      ),
+    );
+  }
+}
+
+class StarIcon extends StatefulWidget {
+  final bool isFilled;
+  final VoidCallback onPressed;
+
+  const StarIcon({super.key, required this.isFilled, required this.onPressed});
+
+  @override
+  _StarIconState createState() => _StarIconState();
+}
+
+class _StarIconState extends State<StarIcon> {
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      onPressed: widget.onPressed,
+      icon: Icon(
+        widget.isFilled ? Icons.star : Icons.star_border,
+        color: widget.isFilled ? Colors.yellow : Colors.black,
+        size: 24,
       ),
     );
   }
