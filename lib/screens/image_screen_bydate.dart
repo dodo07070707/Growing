@@ -132,7 +132,6 @@ class _ImageScreenByDateState extends State<ImageScreenByDate> {
                 ),
               ),
             ),
-            Text('$staredDate,$date,$imagePaths')
           ],
         ),
       ),

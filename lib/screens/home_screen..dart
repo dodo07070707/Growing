@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
+import 'package:jinlo_project/screens/notice_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -136,6 +137,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           Icons.notifications_none_outlined,
                           size: 30,
                         ),
+                        onTap: () {
+                          Get.to(() => const NoticeScreen());
+                        },
                       ),
                       Image.asset(
                         'assets/logos/logo_green.png',
@@ -152,127 +156,162 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: screenHeight / 844 * 16),
-              Container(
-                width: screenWidth / 390 * 390,
-                height: screenHeight / 844 * 78,
-                decoration: const BoxDecoration(
-                  color: Color(0xFFD9D9D9),
-                ),
-                child: const Center(
-                  child: Text(
-                    '광고 위치',
-                    style: TextStyle(color: Colors.black, fontSize: 20),
-                  ),
-                ),
-              ),
               SizedBox(height: screenHeight / 844 * 30),
               Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: screenWidth / 390 * 36),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.numbers,
-                                size: 24,
-                                color: Colors.black,
-                              ),
-                              Text(
-                                name,
-                                style: GRTextTheme.MainCardDescrb,
-                              )
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Icon(Icons.calendar_month,
-                                  size: 24, color: Colors.black),
-                              const SizedBox(width: 2),
-                              Text(daycountingText,
-                                  style: GRTextTheme.MainCardDescrb),
-                            ],
-                          )
-                        ],
-                      ),
-                      SizedBox(height: screenHeight / 844 * 6),
-                      Column(
-                        children: [
-                          Container(
-                              decoration: const BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(15),
-                                      topRight: Radius.circular(15))),
-                              child: Stack(
-                                children: [
-                                  FutureBuilder(
-                                      future: getFilePath(),
-                                      builder: (context, snapshot) {
-                                        if (snapshot.hasData) {
-                                          return Container(
-                                            width: screenWidth / 390 * 330,
-                                            height: screenWidth / 390 * 330,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  const BorderRadius.only(
-                                                      topLeft:
-                                                          Radius.circular(15),
-                                                      topRight:
-                                                          Radius.circular(15)),
-                                              image: DecorationImage(
-                                                image: FileImage(File(
-                                                    '$filePath/$staredDate.jpg')),
-                                                fit: BoxFit.cover,
-                                              ),
+                padding:
+                    EdgeInsets.symmetric(horizontal: screenWidth / 390 * 36),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.numbers,
+                              size: 24,
+                              color: Colors.black,
+                            ),
+                            Text(
+                              name,
+                              style: GRTextTheme.MainCardDescrb,
+                            )
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(Icons.calendar_month,
+                                size: 24, color: Colors.black),
+                            const SizedBox(width: 2),
+                            Text(daycountingText,
+                                style: GRTextTheme.MainCardDescrb),
+                          ],
+                        )
+                      ],
+                    ),
+                    SizedBox(height: screenHeight / 844 * 6),
+                    Column(
+                      children: [
+                        Container(
+                            decoration: const BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(15),
+                                    topRight: Radius.circular(15))),
+                            child: Stack(
+                              children: [
+                                FutureBuilder(
+                                    future: getFilePath(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasData) {
+                                        return Container(
+                                          width: screenWidth / 390 * 330,
+                                          height: screenWidth / 390 * 330,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(15),
+                                                    topRight:
+                                                        Radius.circular(15)),
+                                            image: DecorationImage(
+                                              image: FileImage(File(
+                                                  '$filePath/$staredDate.jpg')),
+                                              fit: BoxFit.cover,
                                             ),
-                                          );
-                                        } else {
-                                          return const Text('안돼');
-                                        }
-                                      }),
-                                  Container(
-                                    width: screenWidth / 390 * 330,
-                                    height: screenWidth / 390 * 330,
-                                    decoration: const BoxDecoration(
-                                      color: Color.fromRGBO(0, 0, 0, 0.5),
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(15),
-                                        topRight: Radius.circular(15),
-                                      ),
+                                          ),
+                                        );
+                                      } else {
+                                        return const Text('안돼');
+                                      }
+                                    }),
+                                Container(
+                                  width: screenWidth / 390 * 330,
+                                  height: screenWidth / 390 * 330,
+                                  decoration: const BoxDecoration(
+                                    color: Color.fromRGBO(0, 0, 0, 0.5),
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(15),
+                                      topRight: Radius.circular(15),
                                     ),
                                   ),
-                                ],
-                              )),
-                          GestureDetector(
-                            onTap: () {
-                              _showMemoDialog();
-                            },
-                            child: Container(
-                              width: screenHeight / 844 * 330,
-                              height: screenHeight / 844 * 120,
-                              decoration: const BoxDecoration(
-                                color: Color(0xFFD9D9D9),
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(15),
-                                  bottomRight: Radius.circular(15),
                                 ),
+                              ],
+                            )),
+                        GestureDetector(
+                          onTap: () {
+                            _showMemoDialog();
+                          },
+                          child: Container(
+                            width: screenHeight / 844 * 330,
+                            height: screenHeight / 844 * 120,
+                            decoration: const BoxDecoration(
+                              color: Color(0xFFD9D9D9),
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(15),
+                                bottomRight: Radius.circular(15),
                               ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(14.0),
-                                child:
-                                    Text(memo, style: GRTextTheme.MainCardMemo),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(14.0),
+                              child:
+                                  Text(memo, style: GRTextTheme.MainCardMemo),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: screenHeight / 844 * 20),
+                    Container(
+                      // !광고
+                      width: screenHeight / 844 * 330,
+                      height: screenHeight / 844 * 78,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF6B19DC),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Stack(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(1),
+                              border:
+                                  Border.all(color: Colors.blue, width: 0.4),
+                            ),
+                            width: screenWidth / 390 * 30,
+                            height: screenHeight / 844 * 20,
+                            child: const Center(
+                              child: Text(
+                                'Ad',
+                                style:
+                                    TextStyle(color: Colors.blue, fontSize: 12),
                               ),
+                            ),
+                          ),
+                          Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'assets/logos/ad/abibo_logo1.png',
+                                  height: screenHeight / 844 * 30,
+                                ),
+                                SizedBox(
+                                  width: screenWidth / 390 * 14,
+                                ),
+                                Image.asset(
+                                  'assets/logos/ad/abibo_logo2.png',
+                                  height: screenHeight / 844 * 30,
+                                ),
+                              ],
                             ),
                           ),
                         ],
                       ),
-                    ],
-                  )),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
