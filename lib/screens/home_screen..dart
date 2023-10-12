@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:jinlo_project/screens/notice_screen.dart';
+import 'package:jinlo_project/screens/setting_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -151,6 +152,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           Icons.settings_outlined,
                           size: 30,
                         ),
+                        onTap: () {
+                          Get.to(() => const SettingScreen());
+                        },
                       ),
                     ],
                   ),

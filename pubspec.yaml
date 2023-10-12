@@ -52,6 +52,7 @@ dependencies:
   image_gallery_saver:
   dio:
   permission_handler:
+  flutter_inappwebview:
 
 dev_dependencies:
   flutter_test:
