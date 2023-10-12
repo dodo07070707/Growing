@@ -24,7 +24,7 @@ void _showAlert(BuildContext context) {
     builder: (context) {
       return CupertinoAlertDialog(
         title: const Text("초기화"),
-        content: const Text("PIN을 포함한 \n모든 데이터를 삭제하시겠습니까?"),
+        content: const Text("모든 데이터를 삭제하시겠습니까?"),
         actions: [
           CupertinoDialogAction(
             child: const Text("예"),

@@ -99,7 +99,7 @@ class _ImageScreenState extends State<ImageScreen> {
                 Row(
                   children: [
                     SizedBox(width: screenWidth / 390 * 22),
-                    const Icon(Icons.arrow_back_ios_new,
+                    const Icon(Icons.image_outlined,
                         size: 24, color: Colors.black),
                     SizedBox(width: screenWidth / 390 * 6),
                     Text(
