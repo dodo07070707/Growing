@@ -1,4 +1,4 @@
-name: jinlo_project
+name: growing
 description: A new Flutter project.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -53,6 +53,12 @@ dependencies:
   dio:
   permission_handler:
   flutter_inappwebview:
+  flutter_launcher_icons:
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: false
+  image_path: "assets/logos/applogo.png"
 
 dev_dependencies:
   flutter_test:

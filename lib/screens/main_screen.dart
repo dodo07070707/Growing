@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
-import 'package:jinlo_project/screens/camera_screen.dart';
-import 'package:jinlo_project/screens/home_screen..dart';
-import 'package:jinlo_project/screens/image_screen.dart';
+import 'package:growing/screens/camera_screen.dart';
+import 'package:growing/screens/home_screen..dart';
+import 'package:growing/screens/image_screen.dart';
 import 'package:get/get.dart';
-import 'package:jinlo_project/themes/color_theme.dart';
+import 'package:growing/themes/color_theme.dart';
 import 'package:event_bus/event_bus.dart';
-import 'package:jinlo_project/themes/text_theme.dart';
+import 'package:growing/themes/text_theme.dart';
 
 //! preview에서 back칠때 myController.isButtonPressed.value 값 변경
 //! notchbar 말고 icon에서만 눌림

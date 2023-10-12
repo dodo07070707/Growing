@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jinlo_project/themes/color_theme.dart';
-import 'package:jinlo_project/themes/text_theme.dart';
+import 'package:growing/themes/color_theme.dart';
+import 'package:growing/themes/text_theme.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jinlo_project/themes/color_theme.dart';
-import 'package:jinlo_project/static.dart';
-import 'package:jinlo_project/screens/webview_screen.dart';
+import 'package:growing/themes/color_theme.dart';
+import 'package:growing/static.dart';
+import 'package:growing/screens/webview_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

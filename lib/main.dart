@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:jinlo_project/screens/splash_screen.dart';
-import 'package:jinlo_project/screens/start_screen.dart';
-import 'package:jinlo_project/screens/main_screen.dart';
+import 'package:growing/screens/splash_screen.dart';
+import 'package:growing/screens/start_screen.dart';
+import 'package:growing/screens/main_screen.dart';
 import 'themes/color_theme.dart';
 import 'package:flutter/services.dart';
 

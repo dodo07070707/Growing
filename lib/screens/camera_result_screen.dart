@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:jinlo_project/screens/main_screen.dart';
-import 'package:jinlo_project/themes/color_theme.dart';
-import 'package:jinlo_project/themes/text_theme.dart';
+import 'package:growing/screens/main_screen.dart';
+import 'package:growing/themes/color_theme.dart';
+import 'package:growing/themes/text_theme.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';

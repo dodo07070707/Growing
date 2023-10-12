@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:jinlo_project/themes/color_theme.dart';
+import 'package:growing/themes/color_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:jinlo_project/themes/text_theme.dart';
+import 'package:growing/themes/text_theme.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
-import 'package:jinlo_project/screens/notice_screen.dart';
-import 'package:jinlo_project/screens/setting_screen.dart';
+import 'package:growing/screens/notice_screen.dart';
+import 'package:growing/screens/setting_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
