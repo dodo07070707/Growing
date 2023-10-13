@@ -9,6 +9,8 @@ import 'dart:io';
 import 'package:growing/screens/notice_screen.dart';
 import 'package:growing/screens/setting_screen.dart';
 import 'package:growing/custom_text.dart';
+import 'package:dots_indicator/dots_indicator.dart';
+import 'package:growing/screens/ad_webview/abibo_webview.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -26,6 +28,9 @@ class _HomeScreenState extends State<HomeScreen> {
   int daysRemaining = 0;
   String staredDate = '';
   String filePath = '';
+  final PageController _pageController = PageController(initialPage: 0);
+  int currentPage = 0;
+  int numberOfPages = 2;
 
   @override
   void initState() {
@@ -105,10 +110,17 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     // ignore: unused_local_variable
     double screenWidth = MediaQuery.of(context).size.width;
+
     String formattedSelectedDate =
         DateFormat('yyyy-MM-dd').format(selectedDate);
     return Scaffold(
@@ -287,52 +299,48 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                     SizedBox(height: screenHeight / 844 * 20),
-                    Container(
-                      // !광고
-                      width: screenHeight / 844 * 330,
-                      height: screenHeight / 844 * 78,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF6B19DC),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Stack(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(1),
-                              border:
-                                  Border.all(color: Colors.blue, width: 0.4),
-                            ),
-                            width: screenWidth / 390 * 30,
-                            height: screenHeight / 844 * 20,
-                            child: const Center(
-                              child: CustomText(
-                                text: 'Ad',
-                                style:
-                                    TextStyle(color: Colors.blue, fontSize: 12),
+                    Column(
+                      children: [
+                        SizedBox(
+                          width: screenHeight / 844 * 330,
+                          height: screenHeight / 844 * 78,
+                          child: PageView(
+                            controller: _pageController,
+                            onPageChanged: (int page) {
+                              setState(() {
+                                currentPage = page;
+                              });
+                            },
+                            children: [
+                              AbiboAd(
+                                screenHeight: screenHeight,
+                                screenWidth: screenWidth,
                               ),
+                              DaywellAd(
+                                screenHeight: screenHeight,
+                                screenWidth: screenWidth,
+                              ),
+                            ],
+                          ),
+                        ),
+                        DotsIndicator(
+                          dotsCount: numberOfPages,
+                          position: currentPage,
+                          decorator: DotsDecorator(
+                            color: Colors.grey, // 비선택된 점 색상
+                            activeColor: GRColors.MAIN_THEME,
+                            activeSize: Size(
+                                screenWidth / 390 * 10, screenWidth / 390 * 9),
+                            size: Size(
+                                screenWidth / 390 * 6, screenWidth / 390 * 6),
+                            spacing: EdgeInsets.only(
+                              top: screenWidth / 844 * 12,
+                              left: screenWidth / 390 * 2.7,
+                              right: screenWidth / 390 * 2.7,
                             ),
                           ),
-                          Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  'assets/logos/ad/abibo_logo1.png',
-                                  height: screenHeight / 844 * 30,
-                                ),
-                                SizedBox(
-                                  width: screenWidth / 390 * 14,
-                                ),
-                                Image.asset(
-                                  'assets/logos/ad/abibo_logo2.png',
-                                  height: screenHeight / 844 * 30,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -340,6 +348,124 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class AbiboAd extends StatelessWidget {
+  const AbiboAd({
+    super.key,
+    required this.screenHeight,
+    required this.screenWidth,
+  });
+
+  final double screenHeight;
+  final double screenWidth;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Get.to(() => const AbiboWebview());
+      },
+      child: Container(
+        // !광고
+        width: screenHeight / 844 * 330,
+        height: screenHeight / 844 * 78,
+        decoration: BoxDecoration(
+          color: const Color(0xFF6B19DC),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Stack(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(1),
+                border: Border.all(color: Colors.blue, width: 0.4),
+              ),
+              width: screenWidth / 390 * 30,
+              height: screenHeight / 844 * 20,
+              child: const Center(
+                child: CustomText(
+                  text: 'Ad',
+                  style: TextStyle(color: Colors.blue, fontSize: 12),
+                ),
+              ),
+            ),
+            Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/logos/ad/abibo_logo1.png',
+                    height: screenHeight / 844 * 30,
+                  ),
+                  SizedBox(
+                    width: screenWidth / 390 * 14,
+                  ),
+                  Image.asset(
+                    'assets/logos/ad/abibo_logo2.png',
+                    height: screenHeight / 844 * 30,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class DaywellAd extends StatelessWidget {
+  const DaywellAd({
+    super.key,
+    required this.screenHeight,
+    required this.screenWidth,
+  });
+
+  final double screenHeight;
+  final double screenWidth;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // !광고
+      width: screenHeight / 844 * 330,
+      height: screenHeight / 844 * 78,
+      decoration: BoxDecoration(
+        color: const Color(0xFF40C4FF),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(1),
+              border: Border.all(color: Colors.blue, width: 0.4),
+            ),
+            width: screenWidth / 390 * 30,
+            height: screenHeight / 844 * 20,
+            child: const Center(
+              child: CustomText(
+                text: 'Ad',
+                style: TextStyle(color: Colors.blue, fontSize: 12),
+              ),
+            ),
+          ),
+          Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'assets/logos/ad/daywell_logo1.png',
+                  height: screenHeight / 844 * 45,
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
