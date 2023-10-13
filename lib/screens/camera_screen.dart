@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'camera_result_screen.dart';
 import 'main_screen.dart';
+import 'package:get/get.dart';
 
 class CameraScreen extends StatefulWidget {
   const CameraScreen({super.key});
@@ -42,6 +43,7 @@ class _CameraScreenState extends State<CameraScreen> {
   void _onTakePicture(BuildContext context) async {
     if (_cameraController != null) {
       try {
+        Get.snackbar('알림', '사진이 찍히고 있습니다. 기기를 움직이지 말고 잠시만 기다려주세요');
         final XFile image = await _cameraController!.takePicture();
         if (image != null) {
           Navigator.of(context).push(

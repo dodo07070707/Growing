@@ -1,3 +1,3 @@
 abstract class GrowingStatic {
-  static const AppVersion = '0.1.1';
+  static const AppVersion = '1.0.0';
 }
