@@ -198,50 +198,68 @@ class _HomeScreenState extends State<HomeScreen> {
                     Column(
                       children: [
                         Container(
-                            decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(15),
-                                    topRight: Radius.circular(15))),
-                            child: Stack(
-                              children: [
-                                FutureBuilder(
-                                    future: getFilePath(),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.hasData) {
-                                        return Container(
-                                          width: screenWidth / 390 * 330,
-                                          height: screenWidth / 390 * 330,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                const BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(15),
-                                                    topRight:
-                                                        Radius.circular(15)),
-                                            image: DecorationImage(
-                                              image: FileImage(File(
-                                                  '$filePath/$staredDate.jpg')),
-                                              fit: BoxFit.cover,
+                          decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(15),
+                                  topRight: Radius.circular(15))),
+                          child: Stack(
+                            children: [
+                              FutureBuilder<String>(
+                                  future: getFilePath(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData &&
+                                        snapshot.data!.isNotEmpty &&
+                                        staredDate != '') {
+                                      return Container(
+                                        width: screenWidth / 390 * 330,
+                                        height: screenWidth / 390 * 330,
+                                        decoration: BoxDecoration(
+                                          borderRadius: const BorderRadius.only(
+                                              topLeft: Radius.circular(15),
+                                              topRight: Radius.circular(15)),
+                                          image: DecorationImage(
+                                            image: FileImage(File(
+                                                '$filePath/$staredDate.jpg')),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      );
+                                    } else {
+                                      return SizedBox(
+                                        width: screenWidth / 390 * 330,
+                                        height: screenWidth / 390 * 330,
+                                        child: Center(
+                                          child: Padding(
+                                            padding: EdgeInsets.all(
+                                              screenWidth / 390 * 20,
+                                            ),
+                                            child: const Text(
+                                              '사진을 찍고, 별모양 버튼을 눌러\n대표사진으로 등록해보세요!',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.black,
+                                              ),
                                             ),
                                           ),
-                                        );
-                                      } else {
-                                        return const Text('안돼');
-                                      }
-                                    }),
-                                Container(
-                                  width: screenWidth / 390 * 330,
-                                  height: screenWidth / 390 * 330,
-                                  decoration: const BoxDecoration(
-                                    color: Color.fromRGBO(0, 0, 0, 0.5),
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(15),
-                                      topRight: Radius.circular(15),
-                                    ),
+                                        ),
+                                      );
+                                    }
+                                  }),
+                              Container(
+                                width: screenWidth / 390 * 330,
+                                height: screenWidth / 390 * 330,
+                                decoration: const BoxDecoration(
+                                  color: Color.fromRGBO(0, 0, 0, 0.5),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(15),
+                                    topRight: Radius.circular(15),
                                   ),
                                 ),
-                              ],
-                            )),
+                              ),
+                            ],
+                          ),
+                        ),
                         GestureDetector(
                           onTap: () {
                             _showMemoDialog();

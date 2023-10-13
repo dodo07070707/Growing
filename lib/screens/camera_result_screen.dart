@@ -6,6 +6,7 @@ import 'package:growing/themes/text_theme.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:growing/custom_text.dart';
 
 class PhotoPreview extends StatelessWidget {
   final String imagePath;
@@ -53,8 +54,8 @@ class PhotoPreview extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    '사진 확인',
+                  const CustomText(
+                    text: '사진 확인',
                     style: GRTextTheme.TitleMiddle,
                   ),
                   SizedBox(height: screenHeight / 844 * 80),
@@ -68,8 +69,8 @@ class PhotoPreview extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: screenHeight / 844 * 12),
-                  const Text(
-                    '사진이 찍혔습니다! 마음에 드시나요?',
+                  const CustomText(
+                    text: '사진이 찍혔습니다! 마음에 드시나요?',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.black,
@@ -101,8 +102,8 @@ class PhotoPreview extends StatelessWidget {
                         ],
                       ),
                       child: const Center(
-                        child: Text(
-                          '다시 촬영하기',
+                        child: CustomText(
+                          text: '다시 촬영하기',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Color(0xFFE81B00),
@@ -135,8 +136,8 @@ class PhotoPreview extends StatelessWidget {
                             )
                           ]),
                       child: const Center(
-                        child: Text(
-                          '저장하기',
+                        child: CustomText(
+                          text: '저장하기',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.white,
