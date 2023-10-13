@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:growing/themes/color_theme.dart';
 import 'package:growing/themes/text_theme.dart';
+import 'package:growing/custom_text.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -39,8 +40,8 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             Column(
               children: [
-                Text(
-                  'Copyright 2023. Growing All rights reserved',
+                CustomText(
+                  text: 'Copyright 2023. Growing All rights reserved',
                   textAlign: TextAlign.center,
                   style: GRTextTheme.CopyrightText,
                 ),

@@ -5,6 +5,7 @@ import 'package:growing/themes/color_theme.dart';
 import 'package:growing/themes/text_theme.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:growing/custom_text.dart';
 
 class StartScreen extends StatefulWidget {
   const StartScreen({super.key});
@@ -90,10 +91,11 @@ class _StartScreenState extends State<StartScreen> {
                       height: 100,
                     ),
                     SizedBox(height: screenHeight / 844 * 10),
-                    const Text('Growing', style: GRTextTheme.StartMainText),
+                    const CustomText(
+                        text: 'Growing', style: GRTextTheme.StartMainText),
                     SizedBox(height: screenHeight / 844 * 40),
-                    const Text(
-                      '환영합니다\n키울 생물의 이름과\n처음 만난 날짜를 입력해주세요',
+                    const CustomText(
+                      text: '환영합니다\n키울 생물의 이름과\n처음 만난 날짜를 입력해주세요',
                       style: GRTextTheme.StartDescText,
                       textAlign: TextAlign.center,
                     ),
@@ -140,8 +142,8 @@ class _StartScreenState extends State<StartScreen> {
                         ),
                         onPressed: _selectDate,
                         child: Center(
-                          child: Text(
-                            (selectedDate != null)
+                          child: CustomText(
+                            text: (selectedDate != null)
                                 ? DateFormat('yyyy년 MM월 dd일')
                                     .format(selectedDate!)
                                 : "날짜 선택",
@@ -162,8 +164,8 @@ class _StartScreenState extends State<StartScreen> {
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: const Center(
-                      child: Text(
-                        '다음으로',
+                      child: CustomText(
+                        text: '다음으로',
                         style: TextStyle(
                           color: Color(0xFF00B375),
                           fontSize: 18,

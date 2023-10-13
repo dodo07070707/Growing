@@ -5,6 +5,7 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:get/get.dart';
 import 'image_screen_bydate.dart';
+import 'package:growing/custom_text.dart';
 
 class ImageScreen extends StatefulWidget {
   const ImageScreen({super.key});
@@ -102,8 +103,8 @@ class _ImageScreenState extends State<ImageScreen> {
                     const Icon(Icons.image_outlined,
                         size: 24, color: Colors.black),
                     SizedBox(width: screenWidth / 390 * 6),
-                    Text(
-                      name,
+                    CustomText(
+                      text: name,
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 24,
@@ -119,8 +120,8 @@ class _ImageScreenState extends State<ImageScreen> {
                     const Icon(Icons.calendar_month,
                         size: 24, color: Colors.black),
                     SizedBox(width: screenWidth / 390 * 4),
-                    Text(
-                      daycountingText,
+                    CustomText(
+                      text: daycountingText,
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 24,
@@ -200,8 +201,8 @@ class _ImageScreenState extends State<ImageScreen> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: [
-                                            Text(
-                                              date,
+                                            CustomText(
+                                              text: date,
                                               style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 15,

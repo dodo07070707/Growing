@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:growing/custom_text.dart';
 
 class NoticeScreen extends StatefulWidget {
   const NoticeScreen({super.key});
@@ -36,8 +37,8 @@ class _NoticeScreenState extends State<NoticeScreen> {
                           },
                         ),
                         SizedBox(width: screenWidth / 390 * 6),
-                        const Text(
-                          '알림',
+                        const CustomText(
+                          text: '알림',
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 24,
@@ -57,8 +58,8 @@ class _NoticeScreenState extends State<NoticeScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Center(
-                    child: Text(
-                      '알림 기능은 준비중에 있습니다!',
+                    child: CustomText(
+                      text: '알림 기능은 준비중에 있습니다!',
                       style: TextStyle(color: Colors.black, fontSize: 15),
                     ),
                   ),

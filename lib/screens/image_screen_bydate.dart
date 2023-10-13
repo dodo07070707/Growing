@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:growing/custom_text.dart';
 
 class ImageScreenByDate extends StatefulWidget {
   const ImageScreenByDate({
@@ -78,8 +79,8 @@ class _ImageScreenByDateState extends State<ImageScreenByDate> {
                           size: 24, color: Colors.black),
                     ),
                     SizedBox(width: screenWidth / 390 * 6),
-                    Text(
-                      name,
+                    CustomText(
+                      text: name,
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 24,
@@ -95,8 +96,8 @@ class _ImageScreenByDateState extends State<ImageScreenByDate> {
                     const Icon(Icons.calendar_month,
                         size: 24, color: Colors.black),
                     SizedBox(width: screenWidth / 390 * 4),
-                    Text(
-                      date,
+                    CustomText(
+                      text: date,
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 24,

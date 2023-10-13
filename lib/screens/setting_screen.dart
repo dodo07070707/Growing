@@ -5,6 +5,7 @@ import 'package:growing/static.dart';
 import 'package:growing/screens/webview_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:growing/custom_text.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -23,11 +24,11 @@ void _showAlert(BuildContext context) {
     context: context,
     builder: (context) {
       return CupertinoAlertDialog(
-        title: const Text("초기화"),
-        content: const Text("모든 데이터를 삭제하시겠습니까?"),
+        title: const CustomText(text: "초기화"),
+        content: const CustomText(text: "모든 데이터를 삭제하시겠습니까?"),
         actions: [
           CupertinoDialogAction(
-            child: const Text("예"),
+            child: const CustomText(text: "예"),
             onPressed: () {
               resetSharedPreferences();
               Navigator.of(context).pop();
@@ -40,7 +41,7 @@ void _showAlert(BuildContext context) {
             },
           ),
           CupertinoDialogAction(
-            child: const Text("아니요"),
+            child: const CustomText(text: "아니요"),
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -81,8 +82,8 @@ class _SettingScreenState extends State<SettingScreen> {
                           },
                         ),
                         SizedBox(width: screenWidth / 390 * 6),
-                        const Text(
-                          '설정',
+                        const CustomText(
+                          text: '설정',
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 24,
@@ -111,8 +112,8 @@ class _SettingScreenState extends State<SettingScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            '알림',
+                          const CustomText(
+                            text: '알림',
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 20,
@@ -126,8 +127,8 @@ class _SettingScreenState extends State<SettingScreen> {
                           ),
                           Row(
                             children: [
-                              const Text(
-                                'ON',
+                              const CustomText(
+                                text: 'ON',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 18,
@@ -171,8 +172,8 @@ class _SettingScreenState extends State<SettingScreen> {
                                 ),
                               ),
                               const SizedBox(width: 10),
-                              Text(
-                                'OFF',
+                              CustomText(
+                                text: 'OFF',
                                 style: TextStyle(
                                   color: Colors.black
                                       .withOpacity(0.30000001192092896),
@@ -202,8 +203,8 @@ class _SettingScreenState extends State<SettingScreen> {
                     SizedBox(width: screenWidth / 390 * 34),
                     Column(
                       children: [
-                        const Text(
-                          '앱 버전',
+                        const CustomText(
+                          text: '앱 버전',
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 20,
@@ -213,8 +214,8 @@ class _SettingScreenState extends State<SettingScreen> {
                           ),
                         ),
                         SizedBox(height: screenHeight / 844 * 6),
-                        const Text(
-                          'V. ${GrowingStatic.AppVersion}',
+                        const CustomText(
+                          text: 'V. ${GrowingStatic.AppVersion}',
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 18,
@@ -241,8 +242,8 @@ class _SettingScreenState extends State<SettingScreen> {
                       onTap: () {
                         Get.to(() => const WebviewScreen());
                       },
-                      child: const Text(
-                        '이용약관',
+                      child: const CustomText(
+                        text: '이용약관',
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 20,
@@ -268,8 +269,8 @@ class _SettingScreenState extends State<SettingScreen> {
                       onTap: () {
                         Get.to(() => const WebviewScreen());
                       },
-                      child: const Text(
-                        '개인정보처리약관',
+                      child: const CustomText(
+                        text: '개인정보처리약관',
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 20,
@@ -295,8 +296,8 @@ class _SettingScreenState extends State<SettingScreen> {
                       onTap: () {
                         _showAlert(context);
                       },
-                      child: const Text(
-                        '전체 삭제 / 초기화',
+                      child: const CustomText(
+                        text: '전체 삭제 / 초기화',
                         style: TextStyle(
                           color: Colors.red,
                           fontSize: 20,

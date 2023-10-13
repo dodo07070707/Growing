@@ -8,6 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:growing/screens/notice_screen.dart';
 import 'package:growing/screens/setting_screen.dart';
+import 'package:growing/custom_text.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -176,8 +177,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               size: 24,
                               color: Colors.black,
                             ),
-                            Text(
-                              name,
+                            CustomText(
+                              text: name,
                               style: GRTextTheme.MainCardDescrb,
                             )
                           ],
@@ -188,7 +189,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             const Icon(Icons.calendar_month,
                                 size: 24, color: Colors.black),
                             const SizedBox(width: 2),
-                            Text(daycountingText,
+                            CustomText(
+                                text: daycountingText,
                                 style: GRTextTheme.MainCardDescrb),
                           ],
                         )
@@ -233,8 +235,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             padding: EdgeInsets.all(
                                               screenWidth / 390 * 20,
                                             ),
-                                            child: const Text(
-                                              '사진을 찍고, 별모양 버튼을 눌러\n대표사진으로 등록해보세요!',
+                                            child: const CustomText(
+                                              text:
+                                                  '사진을 찍고, 별모양 버튼을 눌러\n대표사진으로 등록해보세요!',
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                 fontSize: 20,
@@ -276,8 +279,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(14.0),
-                              child:
-                                  Text(memo, style: GRTextTheme.MainCardMemo),
+                              child: CustomText(
+                                  text: memo, style: GRTextTheme.MainCardMemo),
                             ),
                           ),
                         ),
@@ -303,8 +306,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             width: screenWidth / 390 * 30,
                             height: screenHeight / 844 * 20,
                             child: const Center(
-                              child: Text(
-                                'Ad',
+                              child: CustomText(
+                                text: 'Ad',
                                 style:
                                     TextStyle(color: Colors.blue, fontSize: 12),
                               ),
