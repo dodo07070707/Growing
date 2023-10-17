@@ -6,6 +6,7 @@ import 'package:growing/screens/start_screen.dart';
 import 'package:growing/screens/main_screen.dart';
 import 'themes/color_theme.dart';
 import 'package:flutter/services.dart';
+import 'screens/notifications.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +27,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     _loadData();
+    initNotification();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   }
 

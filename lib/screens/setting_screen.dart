@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:growing/themes/color_theme.dart';
 import 'package:growing/static.dart';
 import 'package:growing/screens/webview_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:growing/custom_text.dart';
+import 'package:growing/screens/notifications.dart';
+import 'package:growing/screens/custom_switch_button.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -15,7 +16,6 @@ class SettingScreen extends StatefulWidget {
 }
 
 Future<void> resetSharedPreferences() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.clear();
 }
 
@@ -53,6 +53,23 @@ void _showAlert(BuildContext context) {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
+  bool entireNotificationenable = false;
+  late SharedPreferences prefs;
+  Future<bool> getEntireNotificationenable() async {
+    prefs = await SharedPreferences.getInstance();
+    entireNotificationenable =
+        prefs.getBool('entireNotificationenable') ?? true;
+    setState(() {});
+    print(entireNotificationenable);
+    return entireNotificationenable;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getEntireNotificationenable();
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -101,92 +118,69 @@ class _SettingScreenState extends State<SettingScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     SizedBox(width: screenWidth / 390 * 34),
-                    GestureDetector(
-                      onTap: () {
-                        Get.snackbar(
-                          '알림',
-                          '알림 기능은 구현중입니다.',
-                          duration: const Duration(seconds: 2),
-                        );
-                      },
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const CustomText(
-                            text: '알림',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w600,
-                              height: 1.25,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const CustomText(
+                          text: '알림',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontFamily: 'Pretendard',
+                            fontWeight: FontWeight.w600,
+                            height: 1.25,
+                          ),
+                        ),
+                        SizedBox(
+                          height: screenHeight / 844 * 6,
+                        ),
+                        Row(
+                          children: [
+                            CustomText(
+                              text: 'ON',
+                              style: TextStyle(
+                                color: entireNotificationenable
+                                    ? Colors.black
+                                    : const Color(0xFF000000).withOpacity(0.3),
+                                fontSize: 18,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w400,
+                                height: 1.25,
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            height: screenHeight / 844 * 6,
-                          ),
-                          Row(
-                            children: [
-                              const CustomText(
-                                text: 'ON',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontFamily: 'Pretendard',
-                                  fontWeight: FontWeight.w400,
-                                  height: 1.25,
-                                ),
+                            const SizedBox(width: 10),
+                            CustomSwitchButton(
+                              value: entireNotificationenable,
+                              onChanged: (value) async {
+                                if (value) {
+                                  await setNotification();
+                                } else {
+                                  await unsetNotification();
+                                }
+                                await prefs.setBool(
+                                    'entireNotificationenable', value);
+
+                                setState(() {
+                                  entireNotificationenable = value;
+                                });
+                              },
+                            ),
+                            const SizedBox(width: 10),
+                            CustomText(
+                              text: 'OFF',
+                              style: TextStyle(
+                                color: entireNotificationenable
+                                    ? Colors.black.withOpacity(0.3)
+                                    : Colors.black,
+                                fontSize: 18,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w400,
+                                height: 1.25,
                               ),
-                              const SizedBox(width: 10),
-                              SizedBox(
-                                width: screenWidth / 390 * 50,
-                                height: screenHeight / 844 * 26,
-                                child: Container(
-                                  width: 52.0,
-                                  height: 28.0,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(24.0),
-                                      color: const Color(0xFFC2FFEA)),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                      top: 2.0,
-                                      bottom: 2.0,
-                                      right: 2.0,
-                                      left: 2.0,
-                                    ),
-                                    child: Container(
-                                      alignment: ((Directionality.of(context) ==
-                                              TextDirection.rtl)
-                                          ? Alignment.centerRight
-                                          : Alignment.centerLeft),
-                                      child: Container(
-                                        width: 20.0,
-                                        height: 20.0,
-                                        decoration: const BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: GRColors.MAIN_THEME,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 10),
-                              CustomText(
-                                text: 'OFF',
-                                style: TextStyle(
-                                  color: Colors.black
-                                      .withOpacity(0.30000001192092896),
-                                  fontSize: 18,
-                                  fontFamily: 'Pretendard',
-                                  fontWeight: FontWeight.w400,
-                                  height: 1.25,
-                                ),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
+                            )
+                          ],
+                        ),
+                      ],
                     ),
                   ],
                 ),

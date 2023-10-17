@@ -55,6 +55,7 @@ dependencies:
   flutter_inappwebview:
   flutter_launcher_icons:
   dots_indicator:
+  flutter_local_notifications:
 
 flutter_icons:
   android: "launcher_icon"
